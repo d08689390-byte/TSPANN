@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TSPANN Lookup Utility</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
+        input, button { padding: 10px; font-size: 16px; margin: 5px 0; }
+        input { width: 70%; border: 1px solid #ccc; border-radius: 4px; }
+        button { background: #0076ff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        pre { background: #f4f5f6; padding: 15px; border-radius: 4px; overflow-x: auto; border-left: 4px solid #0076ff; }
+        .error { color: #d9383a; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h1>🌐 TSPANN Lookup Engine</h1>
+    <p>Query the decentralized Subdomain Project for Assigned Names and Numbers.</p>
+    
+    <input type="text" id="targetDomain" placeholder="e.g., deniskuizinas.is-a.dev">
+    <button onclick="queryTSPANN()">Query Registry</button>
+
+    <div id="outputContainer" style="display:none; margin-top:20px;">
+        <h3>Registry Response</h3>
+        <pre id="jsonOutput"></pre>
+    </div>
+
+<script>
+async function queryTSPANN() {
+    const domain = document.getElementById('targetDomain').value.trim().toLowerCase();
+    const outputContainer = document.getElementById('outputContainer');
+    const jsonOutput = document.getElementById('jsonOutput');
+    
+    if(!domain) return alert("Please type a subdomain to query.");
+    
+    outputContainer.style.display = 'block';
+    jsonOutput.innerHTML = "Fetching TSPANN Bootstrap topology...";
+
+    try {
+        // 1. Fetch your central TSPANN bootstrap map
+        const bootstrapRes = await fetch('/bootstrap.json');
+        if(!bootstrapRes.ok) throw new Error("Failed to pull TSPANN core registry mappings.");
+        const mapData = await bootstrapRes.json();
+        
+        // 2. Determine which registry handles this suffix
+        const match = mapData.services.find(service => domain.endsWith(service.domainSuffix));
+        if(!match) {
+            throw new Error(`Suffix not recognized by TSPANN. If you run the registry for this domain suffix, submit a PR to join the network!`);
+        }
+        
+        // 3. Directly target the authoritative endpoint discovered via TSPANN
+        jsonOutput.innerHTML = `Route matched. Querying authoritative server: ${match.rdapBaseUrl}...`;
+        const rdapRes = await fetch(`${match.rdapBaseUrl}${domain}.json`);
+        if(!rdapRes.ok) throw new Error(`Domain not found or registry server returned HTTP error ${rdapRes.status}`);
+        
+        const rdapData = await rdapRes.json();
+        jsonOutput.textContent = JSON.stringify(rdapData, null, 2);
+        
+    } catch(err) {
+        jsonOutput.innerHTML = `<span class="error">TSPANN Registry Error: ${err.message}</span>`;
+    }
+}
+</script>
+</body>
+</html>
