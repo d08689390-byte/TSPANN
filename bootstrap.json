@@ -1,0 +1,12 @@
+{
+  "project": "TSPANN",
+  "description": "The Subdomain Project for Assigned Names and Numbers Bootstrap Directory",
+  "version": "1.0.0",
+  "publication": "2026-10-07T15:00:00Z",
+  "services": [
+    {
+      "domainSuffix": "is-a.dev",
+      "rdapBaseUrl": "https://github.io"
+    }
+  ]
+}
