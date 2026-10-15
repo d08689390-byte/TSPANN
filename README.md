@@ -6,7 +6,7 @@
 
 ## 📌 What is TSPANN?
 
-In the modern internet ecosystem, community-driven subdomain providers (like `is-a.dev`, `is-an.app`, and `moe.hm`) give millions of developers access to the web. However, because these systems exist outside traditional ICANN governance, they lack standard tools for open data lookup. Traditional WHOIS and IANA/ICANN RDAP servers do not index subdomains.
+In the modern internet ecosystem, community-driven subdomain providers (like `is-a.dev`, `stusite.me`, and `eu.org`) give millions of developers access to the web. However, because these systems exist outside traditional ICANN governance, they lack standard tools for open data lookup. Traditional WHOIS and IANA/ICANN RDAP servers do not index subdomains.
 
 **TSPANN** is an open-source, community-led project designed to mirror the structural architecture of IANA for alternative, developer-focused subdomain registries. 
 
