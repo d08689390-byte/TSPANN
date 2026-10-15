@@ -71,7 +71,7 @@ Submit a Pull Request adding your subdomain suffix and your base endpoint URL to
 ```json
 {
   "domainSuffix": "your-community-suffix.dev",
-  "rdapBaseUrl": "https://<your-username>.github.io/domain/"
+  "rdapBaseUrl": "https://d08689390-byte.github.io/TSPANN/domain/(yourdomain).json/"
 }
 ```
 
