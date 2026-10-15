@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - TSPANN</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --border: #334155;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .meta-date {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 5px;
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            color: var(--accent);
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        p {
+            color: var(--text-main);
+            margin-bottom: 16px;
+            font-size: 1rem;
+        }
+
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.05);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 4px 8px 8px 4px;
+            margin: 20px 0;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+
+        li {
+            position: relative;
+            padding-left: 28px;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .alert-li::before {
+            content: "⚠";
+            color: var(--warning);
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>🛡️ Privacy & Code of Conduct</h1>
+            <div class="meta-date">Last updated: October 15, 2026</div>
+        </header>
+
+        <section>
+            <p>Because the <strong>Subdomain Project for Assigned Names and Numbers (TSPANN)</strong> encourages deployment on public web infrastructures like GitHub Pages, privacy is built directly into our specification philosophy.</p>
+        </section>
+
+        <section>
+            <h2>Data Collection & Publishing Philosophy</h2>
+            <ul>
+                <li><strong>Obfuscation Encouraged:</strong> Registrants are actively discouraged from publishing highly sensitive personal tracking data (such as home addresses or primary mobile phone numbers) in public JSON payloads.</li>
+                <li><strong>Role-Based Data:</strong> We strongly advise using generic contact proxies, corporate domains, or public social handles within your <code>vcardArray</code> metadata blocks to keep your main personal footprint secure.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Open Source Integrity</h2>
+            <p>To keep the decentralized registry secure, clean, and reliable for all peers on the network, we enforce strict review guidelines:</p>
+            <ul>
+                <li class="alert-li">Malicious data formatting or structure injections will be immediately caught and blocked.</li>
+                <li class="alert-li">Intentionally broken routing or malformed target payloads are strictly prohibited.</li>
+                <li class="alert-li">Domain squatting maps intended to hijack namespace without active use will be rejected during peer code review phases.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Privatize Your Registration Data</h2>
+            <div class="highlight-box">
+                <p><strong>Need to use a private email address or phone number for your subdomain whois record?</strong></p>
+                <p style="margin-top: 10px;">Don't worry—you don't have to expose your personal details! Feel free to reach out to me directly. I will help you set up a private email alias or an alternative routing phone number for free or very cheap. These proxies will safely forward inbound calls, texts, or messages straight to your real phone number or email completely privately.</p>
+            </div>
+            <p>For official tracking and records, you can always read our master privacy declaration here: <a href="https://d08689390-byte.github.io/TSPANN/Privacy-Policy" target="_blank" rel="noopener noreferrer">https://d08689390-byte.github.io/TSPANN/Privacy-Policy</a></p>
+        </section>
+
+        <footer>
+            <a href="#" class="back-btn" onclick="window.history.back(); return false;">← Return to Lookup Utility</a>
+        </footer>
+    </div>
+
+</body>
+</html>
