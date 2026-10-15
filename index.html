@@ -13,6 +13,7 @@
             --accent: #38bdf8;
             --accent-hover: #0ea5e9;
             --error: #ef4444;
+            --success: #10b981;
             --border: #334155;
         }
 
@@ -23,7 +24,7 @@
         }
 
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             max-width: 700px;
@@ -37,26 +38,12 @@
             padding: 30px;
             border-radius: 12px;
             border: 1px solid var(--border);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
         }
 
-        header {
-            margin-bottom: 25px;
-        }
-
-        h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
+        header { margin-bottom: 25px; }
+        h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 8px; }
+        p { color: var(--text-muted); font-size: 0.95rem; }
 
         .search-box {
             display: flex;
@@ -72,13 +59,11 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             color: var(--text-main);
-            transition: all 0.2s ease;
         }
 
         input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
         }
 
         button {
@@ -91,17 +76,9 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
-            white-space: nowrap;
         }
 
-        button:hover {
-            background: var(--accent-hover);
-            transform: translateY(-1px);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
+        button:hover { background: var(--accent-hover); }
 
         #outputContainer {
             border-top: 1px solid var(--border);
@@ -110,72 +87,83 @@
             animation: fadeIn 0.3s ease-out;
         }
 
+        /* Readable Card Layout */
+        .readable-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+        }
+
+        .card-row:last-child { border-bottom: none; }
+        .label { color: var(--text-muted); font-weight: 500; }
+        .value { font-weight: 600; }
+        .badge {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        /* Collapsible Raw JSON Area */
+        .accordion-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            width: 100%;
+            text-align: left;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-btn:hover { background: rgba(255, 255, 255, 0.02); color: var(--text-main); }
+        
+        .json-pane {
+            display: none;
+            margin-top: 10px;
+        }
+
         .output-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
-        }
-
-        h3 {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            font-weight: 600;
+            margin-bottom: 10px;
         }
 
         .copy-btn {
-            padding: 6px 12px;
+            padding: 4px 10px;
             font-size: 0.8rem;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-        }
-        
-        .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--border);
             color: var(--text-main);
-            transform: none;
-        }
-
-        .pre-wrapper {
-            position: relative;
         }
 
         pre {
             background: rgba(15, 23, 42, 0.8);
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
             overflow-x: auto;
             border: 1px solid var(--border);
-            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-            font-size: 0.9rem;
-            color: #e2e8f0;
-            max-height: 450px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            max-height: 300px;
         }
 
-        .status-message {
-            color: var(--accent);
-            font-style: italic;
-        }
-
-        .error {
-            color: var(--error);
-            font-weight: 500;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 480px) {
-            .search-box {
-                flex-direction: column;
-            }
-            button {
-                width: 100%;
-            }
-        }
+        .status-message { color: var(--accent); font-style: italic; }
+        .error { color: var(--error); font-weight: 500; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -192,11 +180,20 @@
         </div>
 
         <div id="outputContainer" style="display:none;">
-            <div class="output-header">
-                <h3>Registry Response</h3>
-                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()" style="display: none;">Copy</button>
-            </div>
-            <div class="pre-wrapper">
+            <!-- 1. Readable Summary Dashboard -->
+            <div id="readableView" class="readable-card"></div>
+
+            <!-- 2. Raw JSON Details Accordion -->
+            <button class="accordion-btn" onclick="toggleJsonView()">
+                <span>⚙️ View Raw Registry JSON</span>
+                <span id="caret">▼</span>
+            </button>
+            
+            <div id="jsonPane" class="json-pane">
+                <div class="output-header">
+                    <p style="font-size:0.85rem;"> Authoritative Server Payload</p>
+                    <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()">Copy JSON</button>
+                </div>
                 <pre id="jsonOutput"></pre>
             </div>
         </div>
@@ -207,44 +204,71 @@ async function queryTSPANN() {
     const domain = document.getElementById('targetDomain').value.trim().toLowerCase();
     const outputContainer = document.getElementById('outputContainer');
     const jsonOutput = document.getElementById('jsonOutput');
-    const copyBtn = document.getElementById('copyBtn');
+    const readableView = document.getElementById('readableView');
     
     if(!domain) return alert("Please type a subdomain to query.");
     
     outputContainer.style.display = 'block';
-    copyBtn.style.display = 'none';
-    jsonOutput.innerHTML = `<span class="status-message">Fetching TSPANN Bootstrap topology...</span>`;
+    readableView.innerHTML = `<span class="status-message">Fetching TSPANN Bootstrap topology...</span>`;
+    document.getElementById('jsonPane').style.display = 'none';
 
     try {
-        // 1. Fetch central TSPANN bootstrap map
-        const bootstrapRes = await fetch('https://d08689390-byte.github.io/TSPANN/bootstrap.json');
+        const bootstrapRes = await fetch('https://github.io');
         if(!bootstrapRes.ok) throw new Error("Failed to pull TSPANN core registry mappings.");
         const mapData = await bootstrapRes.json();
         
-        // 2. Determine which registry handles this suffix
         const match = mapData.services.find(service => domain.endsWith(service.domainSuffix));
-        if(!match) {
-            throw new Error(`Suffix not recognized by TSPANN. If you run the registry for this domain suffix, submit a PR to join the network!`);
-        }
+        if(!match) throw new Error(`Suffix not recognized by TSPANN network.`);
         
-        // 3. Smart URL Resolver: Safely handle if base URL already points directly to the target file
         let targetUrl = match.rdapBaseUrl;
         if (!targetUrl.endsWith(`${domain}.json`)) {
-            // If the base URL is just a folder pathway, build the query path cleanly
             targetUrl = targetUrl.endsWith('/') ? `${targetUrl}${domain}.json` : `${targetUrl}/${domain}.json`;
         }
 
-        jsonOutput.innerHTML = `<span class="status-message">Route matched. Querying authoritative server...</span>`;
+        readableView.innerHTML = `<span class="status-message">Querying authoritative registry server...</span>`;
         
         const rdapRes = await fetch(targetUrl);
-        if(!rdapRes.ok) throw new Error(`Domain not found or registry server returned HTTP error ${rdapRes.status}`);
+        if(!rdapRes.ok) throw new Error(`Domain not found (${rdapRes.status})`);
         
         const rdapData = await rdapRes.json();
+        
+        // Populate Raw JSON Pane
         jsonOutput.textContent = JSON.stringify(rdapData, null, 2);
-        copyBtn.style.display = 'block';
+        
+        // Build the Readable View dynamically out of standard RDAP keys
+        const handle = rdapData.handle || domain;
+        const status = (rdapData.status && rdapData.status[0]) || 'active';
+        
+        // Attempt to extract entity names dynamically if available
+        let owner = 'Unknown Registrant';
+        if (rdapData.entities && rdapData.entities[0] && rdapData.entities[0].vcardArray) {
+            const vcard = rdapData.entities[0].vcardArray[1];
+            const fnProperty = vcard.find(prop => prop[0] === 'fn');
+            if (fnProperty) owner = fnProperty[3];
+        }
+
+        readableView.innerHTML = `
+            <h3 style="margin-bottom:12px; color:var(--accent);">📋 Query Overview</h3>
+            <div class="card-row"><span class="label">Domain Handle</span><span class="value">${handle}</span></div>
+            <div class="card-row"><span class="label">Status</span><span class="value"><span class="badge">${status}</span></span></div>
+            <div class="card-row"><span class="label">Registrant Entity</span><span class="value" style="color:var(--accent);">${owner}</span></div>
+        `;
         
     } catch(err) {
-        jsonOutput.innerHTML = `<span class="error">❌ TSPANN Registry Error: ${err.message}</span>`;
+        readableView.innerHTML = `<span class="error">❌ TSPANN Registry Error: ${err.message}</span>`;
+        jsonOutput.textContent = `Error details: ${err.message}`;
+    }
+}
+
+function toggleJsonView() {
+    const pane = document.getElementById('jsonPane');
+    const caret = document.getElementById('caret');
+    if(pane.style.display === 'block') {
+        pane.style.display = 'none';
+        caret.textContent = '▼';
+    } else {
+        pane.style.display = 'block';
+        caret.textContent = '▲';
     }
 }
 
@@ -253,11 +277,10 @@ function copyToClipboard() {
     const btn = document.getElementById('copyBtn');
     navigator.clipboard.writeText(text).then(() => {
         btn.textContent = 'Copied!';
-        setTimeout(() => btn.textContent = 'Copy', 2000);
+        setTimeout(() => btn.textContent = 'Copy JSON', 2000);
     });
 }
 
-// Allow pressing Enter key to trigger search
 document.getElementById('targetDomain').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') queryTSPANN();
 });
