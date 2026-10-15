@@ -83,8 +83,17 @@ Because TSPANN encourages deployment on public web infrastructures like GitHub P
 * **Obfuscation Encouraged:** Registrants are actively discouraged from publishing highly sensitive personal tracking data (such as home addresses or primary mobile phone numbers) in public JSON payloads. 
 * **Role-Based Data:** We advise using generic contact proxies, corporate domains, or public social handles within the `vcardArray` metadata blocks.
 * **Open Source Integrity:** Malicious data formatting, intentionally broken routing payloads, or domain squatting maps will be rejected during peer code review.
+* **Privatize Data:** If you need to use a private email address or phone number for the subdomain whois, don't be afraid to contact me as I will be able to get you a private email or phone number for free or cheap that will reroute to your phone number or forward to your email privately, you can also read our privacy policy here: https://d08689390-byte.github.io/TSPANN/Privacy-Policy
 
 ---
+
+## Become a Maintainer
+
+If you would like to become a Maintainer, you have to follow the eligibility criteria:
+* **Have a Subdomain** This is one of the most basic things here, you need a subdomain, you can get one either for free or for cheap, I recommend is-a.dev.
+* **Your Subdomain works** Your Subdomain must have an actual page on it, it **Cannot** have an error page (e.g 404)
+* **Help Out!** You must have some experience first either helping out with TSPANN Pull Requests or Other Things (Include Screenshots!) Things like commenting on PRs to Help me and The User wanting to get on the system or helping me code by sending me ideas! Be creative or inspiring is the Focus!
+* **Applying** If you have met all of the criteria, Please don't hesitate to use the form on my personal website (https://d08689390-byte.github.io/Main) and get in touch!
 
 ## 📄 Compliance Reference Specifications
 
