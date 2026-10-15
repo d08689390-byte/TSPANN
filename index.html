@@ -213,7 +213,7 @@ async function queryTSPANN() {
     document.getElementById('jsonPane').style.display = 'none';
 
     try {
-        const bootstrapRes = await fetch('https://github.io');
+        const bootstrapRes = await fetch('https://d08689390-byte.github.io/TSPANN/bootstrap.json');
         if(!bootstrapRes.ok) throw new Error("Failed to pull TSPANN core registry mappings.");
         const mapData = await bootstrapRes.json();
         
