@@ -5,8 +5,8 @@
   "publication": "2026-10-07T15:00:00Z",
   "services": [
     {
-      "domainSuffix": "is-a.dev",
-      "rdapBaseUrl": "https://github.io"
-    }
+  "domainSuffix": "deniskuizinas.is-a.dev",
+  "rdapBaseUrl": "https://d08689390-byte.github.io/Main/_rdap_domains/"
+}
   ]
 }
