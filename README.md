@@ -71,7 +71,7 @@ Submit a Pull Request adding your subdomain suffix and your base endpoint URL to
 ```json
 {
   "domainSuffix": "(sd).(suffix).(tld)",
-  "rdapBaseUrl": "https://github.com/d08689390-byte/TSPANN/raw/refs/heads/main/domain/(yourdomain).json"
+  "rdapBaseUrl": "./domain/(yourdomain).json"
 }
 ```
 
