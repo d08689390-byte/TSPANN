@@ -227,9 +227,16 @@ async function queryTSPANN() {
             throw new Error(`Suffix not recognized by TSPANN. If you run the registry for this domain suffix, submit a PR to join the network!`);
         }
         
-        // 3. Directly target the authoritative endpoint discovered via TSPANN
+        // 3. Smart URL Resolver: Safely handle if base URL already points directly to the target file
+        let targetUrl = match.rdapBaseUrl;
+        if (!targetUrl.endsWith(`${domain}.json`)) {
+            // If the base URL is just a folder pathway, build the query path cleanly
+            targetUrl = targetUrl.endsWith('/') ? `${targetUrl}${domain}.json` : `${targetUrl}/${domain}.json`;
+        }
+
         jsonOutput.innerHTML = `<span class="status-message">Route matched. Querying authoritative server...</span>`;
-        const rdapRes = await fetch(`${match.rdapBaseUrl}${domain}.json`);
+        
+        const rdapRes = await fetch(targetUrl);
         if(!rdapRes.ok) throw new Error(`Domain not found or registry server returned HTTP error ${rdapRes.status}`);
         
         const rdapData = await rdapRes.json();
