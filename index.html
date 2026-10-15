@@ -2,27 +2,204 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TSPANN Lookup Utility</title>
     <style>
-        body { font-family: system-ui, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; line-height: 1.6; }
-        input, button { padding: 10px; font-size: 16px; margin: 5px 0; }
-        input { width: 70%; border: 1px solid #ccc; border-radius: 4px; }
-        button { background: #0076ff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        pre { background: #f4f5f6; padding: 15px; border-radius: 4px; overflow-x: auto; border-left: 4px solid #0076ff; }
-        .error { color: #d9383a; font-weight: bold; }
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --error: #ef4444;
+            --border: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+        }
+
+        header {
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px 16px;
+            font-size: 1rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            background: var(--accent);
+            color: #0f172a;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #outputContainer {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            margin-top: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            transform: none;
+        }
+
+        .pre-wrapper {
+            position: relative;
+        }
+
+        pre {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            max-height: 450px;
+        }
+
+        .status-message {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .error {
+            color: var(--error);
+            font-weight: 500;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .search-box {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <h1>🌐 TSPANN Lookup Engine</h1>
-    <p>Query the decentralized Subdomain Project for Assigned Names and Numbers.</p>
-    
-    <input type="text" id="targetDomain" placeholder="e.g., deniskuizinas.is-a.dev">
-    <button onclick="queryTSPANN()">Query Registry</button>
+    <div class="container">
+        <header>
+            <h1>🌐 TSPANN Lookup Engine</h1>
+            <p>Query the decentralized Subdomain Project for Assigned Names and Numbers.</p>
+        </header>
+        
+        <div class="search-box">
+            <input type="text" id="targetDomain" placeholder="e.g., deniskuizinas.is-a.dev" autocomplete="off" spellcheck="false">
+            <button onclick="queryTSPANN()">Query Registry</button>
+        </div>
 
-    <div id="outputContainer" style="display:none; margin-top:20px;">
-        <h3>Registry Response</h3>
-        <pre id="jsonOutput"></pre>
+        <div id="outputContainer" style="display:none;">
+            <div class="output-header">
+                <h3>Registry Response</h3>
+                <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()" style="display: none;">Copy</button>
+            </div>
+            <div class="pre-wrapper">
+                <pre id="jsonOutput"></pre>
+            </div>
+        </div>
     </div>
 
 <script>
@@ -30,14 +207,16 @@ async function queryTSPANN() {
     const domain = document.getElementById('targetDomain').value.trim().toLowerCase();
     const outputContainer = document.getElementById('outputContainer');
     const jsonOutput = document.getElementById('jsonOutput');
+    const copyBtn = document.getElementById('copyBtn');
     
     if(!domain) return alert("Please type a subdomain to query.");
     
     outputContainer.style.display = 'block';
-    jsonOutput.innerHTML = "Fetching TSPANN Bootstrap topology...";
+    copyBtn.style.display = 'none';
+    jsonOutput.innerHTML = `<span class="status-message">Fetching TSPANN Bootstrap topology...</span>`;
 
     try {
-        // 1. Fetch your central TSPANN bootstrap map
+        // 1. Fetch central TSPANN bootstrap map
         const bootstrapRes = await fetch('/bootstrap.json');
         if(!bootstrapRes.ok) throw new Error("Failed to pull TSPANN core registry mappings.");
         const mapData = await bootstrapRes.json();
@@ -49,17 +228,32 @@ async function queryTSPANN() {
         }
         
         // 3. Directly target the authoritative endpoint discovered via TSPANN
-        jsonOutput.innerHTML = `Route matched. Querying authoritative server: ${match.rdapBaseUrl}...`;
+        jsonOutput.innerHTML = `<span class="status-message">Route matched. Querying authoritative server...</span>`;
         const rdapRes = await fetch(`${match.rdapBaseUrl}${domain}.json`);
         if(!rdapRes.ok) throw new Error(`Domain not found or registry server returned HTTP error ${rdapRes.status}`);
         
         const rdapData = await rdapRes.json();
         jsonOutput.textContent = JSON.stringify(rdapData, null, 2);
+        copyBtn.style.display = 'block';
         
     } catch(err) {
-        jsonOutput.innerHTML = `<span class="error">TSPANN Registry Error: ${err.message}</span>`;
+        jsonOutput.innerHTML = `<span class="error">❌ TSPANN Registry Error: ${err.message}</span>`;
     }
 }
+
+function copyToClipboard() {
+    const text = document.getElementById('jsonOutput').textContent;
+    const btn = document.getElementById('copyBtn');
+    navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+    });
+}
+
+// Allow pressing Enter key to trigger search
+document.getElementById('targetDomain').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') queryTSPANN();
+});
 </script>
 </body>
 </html>
