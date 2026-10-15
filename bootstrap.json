@@ -6,7 +6,7 @@
   "services": [
     {
       "domainSuffix": "deniskuizinas.is-a.dev",
-      "rdapBaseUrl": "https://github.com/d08689390-byte/TSPANN/raw/refs/heads/main/domain/deniskuizinas.is-a.dev.json"
+      "rdapBaseUrl": "./domain/deniskuizinas.is-a.dev.json"
     }
   ]
 }
