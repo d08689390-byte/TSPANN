@@ -1,0 +1,18 @@
+{
+  "rdapConformance": ["rdap_level_0"],
+  "objectClassName": "domain",
+  "handle": "deniskuizinas-eu-org",
+  "ldhName": "deniskuizinas.eu.org",
+  "status": ["active"],
+  "entities": [
+    {
+      "objectClassName": "entity",
+      "handle": "denis-kuizinas-123",
+      "roles": ["registrant"],
+      "vcardArray": [
+        "vcard",
+        [["version", {}, "text", "4.0"], ["fn", {}, "text", "Denis Kuizinas"]]
+      ]
+    }
+  ]
+}
