@@ -8,5 +8,9 @@
       "domainSuffix": "deniskuizinas.is-a.dev",
       "rdapBaseUrl": "./domain/deniskuizinas.is-a.dev.json"
     }
+    {
+  "domainSuffix": "deniskuizinas.eu.org",
+  "rdapBaseUrl": "./domain/deniskuizinas.eu.org.json"
+}
   ]
 }
