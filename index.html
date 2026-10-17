@@ -218,8 +218,7 @@ async function queryTSPANN() {
         if(!bootstrapRes.ok) throw new Error("Failed to pull TSPANN core registry mappings.");
         const mapData = await bootstrapRes.json();
         
-        const match = mapData.services.find(service => domain.endsWith(service.domainSuffix));
-        if(!match) throw new Error(`Suffix not recognized by TSPANN network.`);
+        
         
         let targetUrl = match.rdapBaseUrl;
         if (!targetUrl.endsWith(`${domain}.json`)) {
